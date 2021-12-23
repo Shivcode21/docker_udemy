@@ -1,0 +1,101 @@
+docker stats > shows live performance data for all containers.
+docker container top/inspect
+-t > pseudo-tty (simulates a real terminal like what SSH does)
+-i > interactive (keep session open to recieve termial input)
+>docker container run -it >>>staet new container interactively
+>docker container exec -it mysql bash >>> run additional command in existing container
+
+start ubuntu
+>docker pull ubuntu
+>docker run -it --name ubuntu_test ubuntu
+>docker exec -it ubuntu bash
+>apt-get update
+>apt-get install curl (installing curl) (curl is a command line tool to transfer data to or from a server, using any of the supported protocols (HTTP, FTP, IMAP, POP3, SCP, SFTP, SMTP, TFTP, TELNET, LDAP or FILE))
+>curl --version
+
+
+
+Docker Networks-
+docker  run -p 80:80 --name webhost -d nginx 
+ docker run -d -p 9000:9000 -v data:/opt/sonarqube/data -v logs:/opt/sonarqube/logs -v extension:/opt/sonarqube/extensions sonarqube
+
+
+-p(--publish) publishing ports is always in HOST:CONTAINER format
+
+>docker container port mysql
+
+>docker network ls >>> show networks
+>docker network inspect >>> inspect a network
+>docker network create --driver >> create a network
+>attach/detach network from container >>> docker network connect/disconnect
+ 
+ >docker network inspect isense_4i_net
+ Create docker network-
+ >docker network create my_app_net
+ Connect a container to specific network
+ >docker run -d --name new_ngenix --network my_app_net nginx
+ Connect to diffrent network
+ >docker connect/disconnect networkid1 ntworkid2
+ 
+ 
+ Docker Networks:DNS
+ Docker daemon has a built-in DNS server that containers use by default
+ Container name
+ 
+ Docker images:(apt package system for containers)
+ A Docker image is a file used to execute code in a Docker container. ...
+ Docker is used to create, run and deploy applications in containers.
+ A Docker image contains application code, libraries, tools, dependencies and other files needed to make an application run.
+ 
+ >hub.docker.com
+ >docker pull nginx/ ngenix:1.11.9 (can give tag)
+ >docker history nginx:latest
+ 
+ 
+ Image layer: 
+ Images are made up of file system changes and metadata.
+ Each layer is uniquely identified and stored once on a host.
+ This saves storage space on host and transfer time on push/pull.
+ A contaier is just single read/write layer on top of image.
+ >docker history nginx:latest
+ >docker image inspect nginx:latest
+ 
+ Image tag & uploading:
+  docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+  
+  docker login
+   docker tag ubuntu:latest shivamdocker1712/shivam:ubuntu_image
+   docker push shivamdocker1712/shivam:ubuntu_image
+   docker pull shivamdocker1712/shivam:ubuntu_image
+   
+  push image to repository  docker push [OPTIONS] NAME[:TAG]
+  pull image to repository docker pull (imagename and tag)
+  
+  
+  docker logout
+  
+  Dockerfile:
+  https://docs.docker.com/engine/reference/builder/
+  
+  Building image with dockerfile
+  >docker build -t $DOCKER_IMG_NAME .
+  (-t -tagging with its name (.) - for taking dockerfile is in this repository)
+
+ Docker volume & mount:
+ Volume- make special location outside container UFS
+ Bind mounts - link containers path to host path
+  We can give volume in Dockerfile (volume remains after container deletion)
+  >docker volume ls
+  >docker volume inspect <volume_name>
+  
+  can give volume in docker run command with -v flag
+  >docker run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1
+  
+  
+  Docker compose
+  https://docs.docker.com/compose/gettingstarted/
+  
+  > pip freeze>requirments.txt
+  
+  
+  
